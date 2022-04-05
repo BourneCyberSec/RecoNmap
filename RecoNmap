@@ -1,0 +1,12 @@
+#!/bin/bash
+
+figlet RecoNmap | lolcat -t -p 300 -s 1000 -F 6
+echo "probing ${1}" 
+
+xterm -geometry 80x27+1285+600 -hold -e nmap -sT  -A $1 &
+xterm -geometry 80x27+735+600 -hold -e nmap -sY $1 -v &
+xterm -geometry 80x27+185+600 -hold -e nmap -sL $1 &
+xterm -geometry 80x27+1285+100 -hold -e nmap -sS - $1 -v &
+xterm -geometry 80x27+735+100 -hold -e nmap -sU -O -sV -A --script=vuln $1 -v &
+xterm -geometry 80x27+185+100 -hold -e ping $1 &
+
